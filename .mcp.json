@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-creator-finder": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-creator-finder"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}
