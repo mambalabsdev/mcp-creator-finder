@@ -46,6 +46,7 @@ Find influencers by keyword or niche across seven creator platforms, with follow
 | `follower_max` | integer | no | Drop creators whose follower count is known and above this. Default `500000`. |
 | `us_only` | boolean | no | Launch scope is US creators. Discovery carries no country signal, so country_guess is null on every row of this actor and this field changes nothing here. It is accepted so the same input runs unchanged on the. Default `true`. |
 | `batch_size` | integer | no | Rows fetched at once. Leave empty for the measured per platform default; the measurement is in the README. Higher is faster and, above the measured point, loses rows. |
+| `contribute_to_shared_pool` | boolean | no | On by default. Contributes the public records this run finds to a shared creator and agency pool that all users of this actor read from. Only public data already in the returned rows is sent, and a contribution is not charged. Set false to read the pool and write nothing. Default `true`. |
 
 Nothing is required. Influencer Finder answers a run with no usable input with a row carrying `row_status` and `error_reason` rather than failing, and the tool mirrors that.
 
@@ -61,6 +62,20 @@ Influencer Finder is pay per event on Apify. Every price below is flat across th
 ## Reading the output
 
 Every row carries `row_status` and `error_reason`. A creator the actor could not read comes back as a row saying why, not as a gap in the list, so an absence is readable rather than inferred. Filter on `row_status` before loading a table.
+
+## What this actor shares
+
+The run contributes the records it finds to a shared creator and agency pool that all users of this actor read from. What one run finds, the next run can read.
+
+The toggle is `contribute_to_shared_pool`. It is on by default. Set it to false and the run still reads the pool and writes nothing to it.
+
+**What this actor contributes.** The creator ID, platform, and handle of every creator it finds. No profile detail, because this actor reads none.
+
+**Only public data that is already in your own output.** Every field written to the pool is a field this run returned to you, read from a page the platform or the creator publishes to anyone without a login. Nothing from your Apify account, your input list, your API keys, or your own notes is sent. A contribution never deletes anything from the pool.
+
+**What a contribution is labeled with.** The actor ID, the run ID, the pool key issued to the actor build, and a hash of the calling IP address, used for the rate limit and nothing else. Your Apify account and your user ID are not recorded.
+
+**Contributing is free.** No event is charged for a write to the pool. If the pool is unreachable the run finishes as normal, the rows are dropped, and the run log says so.
 
 ## Actor
 
