@@ -1,7 +1,7 @@
 {
   "name": "@mambalabsdev/mcp-creator-finder",
   "displayName": "Influencer Finder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for the Mamba Labs Influencer Finder actor on Apify. Keywords or a curated niche in, influencer handles out, one flat row per creator per platform.",
   "type": "module",
   "bin": {
