@@ -202,7 +202,7 @@ server.registerTool(
   {
     title: "Find Influencers by Keyword or Niche",
     description:
-      "Searches TikTok, Instagram, YouTube, Pinterest, Twitch, Threads, and podcasts for creators matching your keywords or one of eight curated niche keyword sets, then filters them to a follower range. Returns one flat row per creator per platform with handle, profile URL, display name, follower count, the search that found them, a stable creator_id, and similar creators from the same keyword cluster. Discovery only: it does not read bios, emails, or link in bio pages, which is what Influencer Profile Scraper and Link in Bio Scraper and Newsletter Detector do. Every row carries row_status and error_reason, so an absence is readable rather than silent. Charges $0.001 per run plus $0.007 per creator returned; a search that returns nothing charges the run start only. Requires an APIFY_TOKEN and consumes Apify credits. Read only.",
+      "Searches TikTok, Instagram, YouTube, Pinterest, Twitch, Threads, and podcasts for creators matching your keywords or one of eight curated niche keyword sets, then filters them to a follower range. Returns one flat row per creator per platform with handle, profile URL, display name, follower count, the search that found them, a stable creator_id, and similar creators from the same keyword cluster. Discovery only: it does not read bios, emails, or link in bio pages, which is what Influencer Profile Scraper and Link in Bio Scraper and Newsletter Detector do. Every row carries row_status and error_reason, so an absence is readable rather than silent. Charges $0.001 per run plus $0.007 per creator returned; a search that returns nothing charges the run start only. Contributes the public records it finds to a shared creator and agency pool that all users of this actor read from, so a later run reads what this one found; `contribute_to_shared_pool` is on by default and turning it off leaves the run reading the pool and writing nothing. Only public data already in the returned rows is contributed, nothing from your Apify account or your input, and a contribution is not charged. Requires an APIFY_TOKEN and consumes Apify credits. Read only.",
     annotations: {
       title: "Find Influencers by Keyword or Niche",
       readOnlyHint: true,
@@ -221,6 +221,11 @@ server.registerTool(
     follower_max: z.number().int().optional().describe("Drop creators whose follower count is known and above this. Default: 500000."),
     us_only: z.boolean().optional().describe("Launch scope is US creators. Discovery carries no country signal, so country_guess is null on every row of this actor and this field changes nothing here. It is accepted so the same input runs unchanged on the Influencer Lead List Builder, where it acts at the profile stage. Default: true."),
     batch_size: z.number().int().optional().describe("Rows fetched at once. Leave empty for the measured per platform default; the measurement is in the README. Higher is faster and, above the measured point, loses rows."),
+    // Shared pool toggle (wo-influencer-newsletter-agency-pool-exchange-2026-09-22, Track 4).
+    // The actor input field is Track 3's; this mirror exists so an MCP caller can turn the
+    // contribution off. Do not publish this wrapper before the actor build that carries the
+    // field is live, or the actor is sent an input property its schema does not have.
+    contribute_to_shared_pool: z.boolean().optional().describe("On by default. Contributes the public records this run finds to a shared creator and agency pool that all users of this actor read from, so a later run reads what this one found. Only public data already in the returned rows is sent, never your Apify account, your input list, or your API keys, and a contribution is not charged. Set false to read the pool and write nothing. Default: true."),
     },
   },
   async (args) =>
