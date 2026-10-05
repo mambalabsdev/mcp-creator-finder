@@ -39,24 +39,27 @@ Find influencers by keyword or niche across seven creator platforms, with follow
 | `keywords` | array | no | Search phrases, one per line, for example "budget travel" or "meal prep coach". Each keyword is searched on each platform. Use `niche` instead to load a curated keyword set. |
 | `niche` | string | no | Loads a curated set of search keywords for the niche (about 60 per niche, measured in the September 2026 pre-research). `max_keywords_per_niche` caps how many are used. Leave as custom to search only your keywords. Default `"custom"`. |
 | `max_keywords_per_niche` | integer | no | How many keywords from the niche set to search. 1 to 60. Default `10`. |
-| `platforms` | array | no | Which platforms to search, and which platforms a bare @handle is looked up on. A full profile URL carries its own platform and ignores this. Supported: TikTok, Instagram, YouTube, Pinterest, Twitch, Threads, and. |
+| `platforms` | array | no | Which platforms to search, and which platforms a bare @handle is looked up on. A full profile URL carries its own platform and ignores this. Supported: TikTok, Instagram, YouTube, Pinterest, Twitch, Threads, and podcasts. |
 | `max_creators_per_keyword` | integer | no | Cap per search. Search engines honor the site: filter for the first page or two only, so 20 to 30 per keyword with more keywords beats deep paging. Default `20`. |
 | `max_creators` | integer | no | Hard cap on rows returned, so a broad niche cannot run away. Default `200`. |
 | `follower_min` | integer | no | Drop creators whose follower count is known and below this. A creator whose count the search did not show is kept, so a later profile read can fill it. Default `5000`. |
 | `follower_max` | integer | no | Drop creators whose follower count is known and above this. Default `500000`. |
-| `us_only` | boolean | no | Launch scope is US creators. Discovery carries no country signal, so country_guess is null on every row of this actor and this field changes nothing here. It is accepted so the same input runs unchanged on the. Default `true`. |
+| `us_only` | boolean | no | Launch scope is US creators. Discovery carries no country signal, so country_guess is null on every row of this actor and this field changes nothing here. It is accepted so the same input runs unchanged on the Influencer Lead List Builder. Default `true`. |
 | `batch_size` | integer | no | Rows fetched at once. Leave empty for the measured per platform default; the measurement is in the README. Higher is faster and, above the measured point, loses rows. |
+| `keyword_time_budget_secs` | integer | no | Wall time allowed for each keyword on each platform, in seconds. A hung search page is given up at the budget, so a full niche set finishes as a SUCCEEDED run. 10 to 600. Default `60`. |
+| `country` | string | no | Runs the search engine queries from this country so results lean to creators there: `any`, `US`, `GB`, `CA`, `AU`, `IE`, `NZ`, `DE`, `FR`, `NL`, or `SE`. `any` rotates the exit country. Default `"any"`. |
 | `contribute_to_shared_pool` | boolean | no | On by default. Contributes the public records this run finds to a shared creator and agency pool that all users of this actor read from. Only public data already in the returned rows is sent, and a contribution is not charged. Set false to read the pool and write nothing. Default `true`. |
 
 Nothing is required. Influencer Finder answers a run with no usable input with a row carrying `row_status` and `error_reason` rather than failing, and the tool mirrors that.
 
 ## Pricing
 
-Influencer Finder is pay per event on Apify. Every price below is flat across the FREE, BRONZE, SILVER, and GOLD tiers.
+Influencer Finder is pay per event on Apify. Every price below is flat across every tier: FREE, BRONZE, SILVER, GOLD, PLATINUM, and DIAMOND.
 
 | Event | Charged for | Price | Fires when |
 | --- | --- | ---: | --- |
 | `actor-start` | Actor start | $0.001 | Once per run, on start. Covers the run overhead. |
+| `apify-actor-start` | Apify actor start | not charged | Apify's synthetic start event. This actor prices its own `actor-start` event instead, so `apify-actor-start` is not charged on top of it. |
 | `creator-found` | Creator found | $0.007 | Once per creator row returned by keyword or niche discovery with a handle and a profile URL. A search that returns nothing charges nothing. |
 
 ## Reading the output
@@ -90,5 +93,6 @@ Actor ID `tpkedmloIIWtXx6sg`. The wrapper calls the actor by that immutable ID r
 | [Link in Bio Scraper and Newsletter Detector](https://apify.com/mambalabs/link-in-bio-newsletter-checker) | `OorucdheTIgu7RFzK` | [`@mambalabsdev/mcp-link-in-bio-newsletter-checker`](https://www.npmjs.com/package/@mambalabsdev/mcp-link-in-bio-newsletter-checker) |
 | [Influencer Change Monitor](https://apify.com/mambalabs/creator-change-monitor) | `d2VVgahNL6UmcLkhg` | [`@mambalabsdev/mcp-creator-change-monitor`](https://www.npmjs.com/package/@mambalabsdev/mcp-creator-change-monitor) |
 | [Influencer Lead List Builder](https://apify.com/mambalabs/creator-lead-list-all-in-one) | `KnmByszcv135yM30G` | [`@mambalabsdev/mcp-creator-lead-list-all-in-one`](https://www.npmjs.com/package/@mambalabsdev/mcp-creator-lead-list-all-in-one) |
+| [Influencer Talent Agency Lookup](https://apify.com/mambalabs/talent-agency-lookup) | `zCuX4Mgyg6JvXgGzd` | [`@mambalabsdev/mcp-talent-agency-lookup`](https://www.npmjs.com/package/@mambalabsdev/mcp-talent-agency-lookup) |
 
 Built by [Mamba Labs](https://mambabuilt.com).
