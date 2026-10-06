@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "mcp-creator-finder",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "MCP server for the Mamba Labs Influencer Finder actor on Apify. Keywords or a curated niche in, influencer handles out, one flat row per creator per platform.",
   "author": {
     "name": "Mamba Labs"
