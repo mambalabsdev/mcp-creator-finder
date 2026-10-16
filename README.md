@@ -49,6 +49,7 @@ Find influencers by keyword or niche across seven creator platforms, with follow
 | `keyword_time_budget_secs` | integer | no | Wall time allowed for each keyword on each platform, in seconds. A hung search page is given up at the budget, so a full niche set finishes as a SUCCEEDED run. 10 to 600. Default `60`. |
 | `country` | string | no | Runs the search engine queries from this country so results lean to creators there: `any`, `US`, `GB`, `CA`, `AU`, `IE`, `NZ`, `DE`, `FR`, `NL`, or `SE`. `any` rotates the exit country. Default `"any"`. |
 | `contribute_to_shared_pool` | boolean | no | On by default. Contributes the public records this run finds to a shared creator and agency pool that all users of this actor read from. Only public data already in the returned rows is sent, and a contribution is not charged. Set false to read the pool and write nothing. Default `true`. |
+| `max_charge_usd` | number | no | Optional cost cap in USD for this run. The actor stops before an item that could take its charges past this amount. Omit to rely on the maximum cost per run set in Apify. |
 
 Nothing is required. Influencer Finder answers a run with no usable input with a row carrying `row_status` and `error_reason` rather than failing, and the tool mirrors that.
 

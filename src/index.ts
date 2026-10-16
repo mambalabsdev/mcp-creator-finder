@@ -202,15 +202,16 @@ server.registerTool(
   {
     title: "Find Influencers by Keyword or Niche",
     description:
-      "Searches TikTok, Instagram, YouTube, Pinterest, Twitch, Threads, and podcasts for creators matching your keywords or one of eight curated niche keyword sets, then filters them to a follower range. Returns one flat row per creator per platform with handle, profile URL, display name, follower count, the search that found them, a stable creator_id, and similar creators from the same keyword cluster. Discovery only: it does not read bios, emails, or link in bio pages, which is what Influencer Profile Scraper and Link in Bio Scraper and Newsletter Detector do. Every row carries row_status and error_reason, so an absence is readable rather than silent. Charges $0.001 per run plus $0.007 per creator returned; a search that returns nothing charges the run start only. Contributes the public records in its rows to a shared creator pool, free and on by default; `contribute_to_shared_pool` explains it and turns it off. A run that does not succeed is returned as an error with its run ID and status. Requires an APIFY_TOKEN and consumes Apify credits. Read only.",
+      "Searches TikTok, Instagram, YouTube, Pinterest, Twitch, Threads, and podcasts for creators matching your keywords or one of eight curated niche keyword sets, then filters them to a follower range. Returns one flat row per creator per platform with handle, profile URL, display name, follower count, the search that found them, a stable creator_id, and similar creators from the same keyword cluster. Discovery only: it does not read bios, emails, or link in bio pages, which is what Influencer Profile Scraper and Link in Bio Scraper and Newsletter Detector do. Every row carries row_status and error_reason, so an absence is readable rather than silent. Charges $0.001 per run plus $0.007 per creator returned; a search that returns nothing charges the run start only. Contributes the public records in its rows to a shared creator pool, free and on by default; `contribute_to_shared_pool` explains it and turns it off. A run that does not succeed is returned as an error with its run ID and status. Requires an APIFY_TOKEN and consumes Apify credits. Reads public data only and writes nothing.",
     annotations: {
       title: "Find Influencers by Keyword or Niche",
-      readOnlyHint: true,
+      readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: true,
     },
     inputSchema: {
+    max_charge_usd: z.number().min(0).optional().describe("Optional. The run stops before any charge that would take this run past this amount, delivers every row already charged, and drops the rest. Leave empty to rely only on the maximum cost per run set in Apify, which the actor also honors."),
     keywords: z.array(z.string()).optional().describe("Search phrases, one per line, for example \"budget travel\" or \"meal prep coach\". Each keyword is searched on each platform. Use `niche` instead to load a curated keyword set."),
     niche: z.enum(["custom", "personal_finance", "business_marketing", "health_fitness", "beauty_skincare", "parenting_family", "food_cooking", "travel", "tech_ai"]).optional().describe("Loads a curated set of search keywords for the niche (about 60 per niche, measured in the September 2026 pre-research). `max_keywords_per_niche` caps how many are used. Leave as custom to search only your keywords. Default: \"custom\"."),
     max_keywords_per_niche: z.number().int().optional().describe("How many keywords from the niche set to search. 1 to 60. Default: 10."),
