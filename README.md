@@ -2,6 +2,8 @@
 
 [![Smithery](https://smithery.ai/badge/mambabuilt/mcp-creator-finder)](https://smithery.ai/servers/mambabuilt/mcp-creator-finder) [![Glama score](https://glama.ai/mcp/servers/mambalabsdev/mcp-creator-finder/badges/score.svg)](https://glama.ai/mcp/servers/mambalabsdev/mcp-creator-finder) [![MCP Registry](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fregistry.modelcontextprotocol.io%2Fv0%2Fservers%3Fsearch%3Dcom.mambabuilt%252Fmcp-creator-finder%26limit%3D1&query=%24.servers%5B0%5D._meta%5B%22io.modelcontextprotocol.registry%2Fofficial%22%5D.status&label=mcp%20registry&color=blue)](https://registry.modelcontextprotocol.io/v0/servers?search=com.mambabuilt/mcp-creator-finder&limit=1) [![npm version](https://img.shields.io/npm/v/@mambalabsdev/mcp-creator-finder)](https://www.npmjs.com/package/@mambalabsdev/mcp-creator-finder) [![npm downloads](https://img.shields.io/npm/dm/@mambalabsdev/mcp-creator-finder)](https://www.npmjs.com/package/@mambalabsdev/mcp-creator-finder) [![license](https://img.shields.io/github/license/mambalabsdev/mcp-creator-finder)](https://github.com/mambalabsdev/mcp-creator-finder/blob/main/LICENSE) [![mcpservers.org](https://img.shields.io/badge/mcpservers.org-listed-blue)](https://mcpservers.org/servers/mambalabsdev/mcp-creator-finder)
 
+<a href="https://mcprush.com/to/creator-finder-mcp?ref=badge"><img width="380" height="200" src="https://mcprush.com/badge/creator-finder-mcp/card.svg" alt="Creator Finder MCP server" /></a>
+
 MCP server for the Mamba Labs [Influencer Finder](https://apify.com/mambalabs/creator-finder) actor on Apify.
 
 Keywords or a curated niche in, influencer handles out, one flat row per creator per platform.
