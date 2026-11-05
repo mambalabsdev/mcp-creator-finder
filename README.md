@@ -4,7 +4,7 @@
 
 <a href="https://mcprush.com/to/creator-finder-mcp?ref=badge"><img width="380" height="200" src="https://mcprush.com/badge/creator-finder-mcp/card.svg" alt="Creator Finder MCP server" /></a>
 
-MCP server for the Mamba Labs [Influencer Finder](https://apify.com/mambalabs/creator-finder) actor on Apify.
+MCP server for the Mamba Labs [Influencer Search Across TikTok, Instagram and YouTube](https://apify.com/mambalabs/creator-finder) actor on Apify.
 
 Keywords or a curated niche in, influencer handles out, one flat row per creator per platform.
 
